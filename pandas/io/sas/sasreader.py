@@ -6,7 +6,7 @@ from pandas.io.common import _stringify_path
 
 
 def read_sas(filepath_or_buffer, format=None, index=None, encoding=None,
-             chunksize=None, iterator=False):
+             chunksize=None, iterator=False, sas7bdat_convert_dates=False):
     """
     Read SAS files stored as either XPORT or SAS7BDAT format files.
 
@@ -25,7 +25,9 @@ def read_sas(filepath_or_buffer, format=None, index=None, encoding=None,
         Read file `chunksize` lines at a time, returns iterator.
     iterator : bool, defaults to False
         If True, returns an iterator for reading the file incrementally.
-
+    sas7bdat_convert_dates : bool, defaults to False
+        If True, parses dates for sas7bdat format.
+        
     Returns
     -------
     DataFrame if iterator=False and chunksize=None, else SAS7BDATReader
@@ -58,7 +60,7 @@ def read_sas(filepath_or_buffer, format=None, index=None, encoding=None,
         from pandas.io.sas.sas7bdat import SAS7BDATReader
         reader = SAS7BDATReader(filepath_or_buffer, index=index,
                                 encoding=encoding,
-                                chunksize=chunksize)
+                                chunksize=chunksize, sas7bdat_convert_dates=convert_dates)
     else:
         raise ValueError('unknown SAS format')
 
